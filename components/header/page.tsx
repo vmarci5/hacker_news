@@ -20,50 +20,61 @@ export default function Navbar() {
             href="/"
             rel="Dashboard"
             title="Dashboard"
-            className="inline-block"
+            className="inline-flex items-center gap-2" // <<< fontos változás
           >
             <Image
               src="/images/logo.png"
               alt="Hacker News Logo"
               width={50}
               height={50}
+              className="cursor-pointer"
             />
+            <span className="font-bold text-white">Hacker News</span>
           </Link>
         </section>
         <section className="hidden md:flex space-x-2 justify-center">
           <Link href="/newest" rel="New" title="New">
-            <Button className="transition-transform duration-150 hover:scale-110">
+            <Button className="transition-transform duration-150 hover:scale-110 cursor-pointer">
               New
             </Button>
           </Link>
-          <Button className="transition-transform duration-150 hover:scale-110">
-            Past
-          </Button>
-          <Button className="transition-transform duration-150 hover:scale-110">
+          <Link href="/past" rel="Past" title="Past">
+            <Button className="transition-transform duration-150 hover:scale-110 cursor-pointer">
+              Past
+            </Button>
+          </Link>
+          <Button
+            className="transition-transform duration-150 hover:scale-110 cursor-pointer disabled:opacity-50"
+            disabled
+          >
             Comments
           </Button>
           <Link href="/ask" rel="Ask" title="Ask">
-            <Button className="transition-transform duration-150 hover:scale-110">
+            <Button className="transition-transform duration-150 hover:scale-110 cursor-pointer">
               Ask
             </Button>
           </Link>
           <Link href="/show" rel="Show" title="Show">
-            <Button className="transition-transform duration-150 hover:scale-110">
+            <Button className="transition-transform duration-150 hover:scale-110 cursor-pointer">
               Show
             </Button>
           </Link>
           <Link href="/jobs" rel="Jobs" title="Jobs">
-            <Button className="transition-transform duration-150 hover:scale-110">
+            <Button className="transition-transform duration-150 hover:scale-110 cursor-pointer">
               Jobs
             </Button>
           </Link>
-          <Button className="transition-transform duration-150 hover:scale-110">
-            Submit
-          </Button>
+          <Link href="/login" rel="Submit" title="Submit" className="block">
+            <Button className="transition-transform duration-150 hover:scale-110 cursor-pointer">
+              Submit
+            </Button>
+          </Link>
         </section>
         <section className="hidden md:flex justify-end ml-auto mr-2">
           <Link href="/login" rel="Login" title="Login">
-            <Button variant="outline">Login</Button>
+            <Button variant="outline" className="cursor-pointer">
+              Login
+            </Button>
           </Link>
         </section>
 
@@ -115,28 +126,41 @@ export default function Navbar() {
       {isClick && (
         <div className="md:hidden px-2 pt-2 pb-3 space-y-2 sm:px-3 text-orange-700">
           <Link href="/newest" rel="New" title="New" className="block">
-            <Button className="w-full justify-start transition-transform duration-150 hover:scale-105">
+            <Button className="w-full justify-start transition-transform duration-150 hover:scale-102">
               New
             </Button>
           </Link>
-          <Button className="w-full justify-start transition-transform duration-150 hover:scale-105">
-            Past
-          </Button>
-          <Button className="w-full justify-start transition-transform duration-150 hover:scale-105">
+          <Link href="/" rel="Past" title="Past" className="block">
+            <Button className="w-full justify-start transition-transform duration-150 hover:scale-102">
+              Past
+            </Button>
+          </Link>
+          <Button
+            className="w-full justify-start transition-transform duration-150 hover:scale-102"
+            disabled
+          >
             Comments
           </Button>
-          <Button className="w-full justify-start transition-transform duration-150 hover:scale-105">
-            Ask
-          </Button>
-          <Button className="w-full justify-start transition-transform duration-150 hover:scale-105">
-            Show
-          </Button>
-          <Button className="w-full justify-start transition-transform duration-150 hover:scale-105">
-            Jobs
-          </Button>
-          <Button className="w-full justify-start transition-transform duration-150 hover:scale-105">
-            Submit
-          </Button>
+          <Link href={"/ask"} rel="Ask" title="Ask" className="block">
+            <Button className="w-full justify-start transition-transform duration-150 hover:scale-102">
+              Ask
+            </Button>
+          </Link>
+          <Link href={"/show"} rel="Show" title="Show" className="block">
+            <Button className="w-full justify-start transition-transform duration-150 hover:scale-102">
+              Show
+            </Button>
+          </Link>
+          <Link href={"/jobs"} rel="Jobs" title="Jobs" className="block">
+            <Button className="w-full justify-start transition-transform duration-150 hover:scale-102">
+              Jobs
+            </Button>
+          </Link>
+          <Link href="/login" rel="Submit" title="Submit" className="block">
+            <Button className="w-full justify-start transition-transform duration-150 hover:scale-102">
+              Submit
+            </Button>
+          </Link>
           <Link href="/login" rel="Login" title="Login" className="block">
             <Button variant="outline" className="w-full justify-start">
               Login
