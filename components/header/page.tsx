@@ -20,7 +20,7 @@ export default function Navbar() {
             href="/"
             rel="Dashboard"
             title="Dashboard"
-            className="inline-flex items-center gap-2" // <<< fontos változás
+            className="inline-flex items-center gap-2" 
           >
             <Image
               src="/images/logo.png"
