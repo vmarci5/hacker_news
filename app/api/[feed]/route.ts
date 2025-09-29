@@ -15,10 +15,10 @@ const feed_endpoint: Record<string, string> = {
 
 export async function GET(
   req: Request,
-  ctx: { params: Promise<{ feed: string }> }
+  { params }: { params: Promise<{ feed: keyof typeof feed_endpoint }> }
 ) {
   const { searchParams } = new URL(req.url);
-  const { feed } = await ctx.params;
+  const { feed } = await params;
 
   const pageSize = Math.max(
     1,
@@ -27,20 +27,45 @@ export async function GET(
   const page = Math.max(1, Number(searchParams.get("page")) || 1);
 
   const feedUrl = feed_endpoint[feed];
-  if (!feedUrl) {
+  if (!feedUrl)
     return NextResponse.json({ error: "Unknown feed" }, { status: 400 });
-  }
 
   const idsRes = await fetch(feedUrl, { next: { revalidate } });
-  if (!idsRes.ok) {
+  if (!idsRes.ok)
     return NextResponse.json({ error: "Failed to load ids" }, { status: 502 });
-  }
-  const ids: number[] = await idsRes.json();
 
-  const totalItems = ids.length;
+  let ids: number[];
+  if (feed === "updates") {
+    const u = await idsRes.json();
+    ids = Array.isArray(u?.items) ? u.items : [];
+  } else {
+    ids = await idsRes.json();
+  }
+
+  let effectiveIds = ids;
+  if (feed === "past") {
+    const cutoff = Math.floor(Date.now() / 1000) - 24 * 60 * 60; // 24h
+    const olderThanDay: number[] = [];
+
+    for (const id of ids) {
+      const it = await fetch(
+        `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
+        {
+          next: { revalidate },
+        }
+      ).then((r) => r.json());
+
+      if (it?.time && it.time <= cutoff) {
+        olderThanDay.push(id);
+      }
+    }
+    effectiveIds = olderThanDay;
+  }
+
+  const totalItems = effectiveIds.length;
   const totalPages = Math.max(1, Math.ceil(totalItems / pageSize));
   const start = (page - 1) * pageSize;
-  const pageIds = ids.slice(start, start + pageSize);
+  const pageIds = effectiveIds.slice(start, start + pageSize);
 
   const items = await Promise.all(
     pageIds.map((id) =>
@@ -60,6 +85,9 @@ export async function GET(
     time: it?.time,
     descendants: it?.descendants,
     type: it?.type,
+    text: it?.text,
+    parent: it?.parent,
+    kids: it?.kids,
   }));
 
   return NextResponse.json(
