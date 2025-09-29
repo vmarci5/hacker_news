@@ -34,7 +34,7 @@ type ApiResponse = {
   totalPages: number;
 };
 
-type Props = {feed?: "top" | "new" | "ask" | "show" | "jobs"};
+type Props = {feed?: "top" | "new" | "ask" | "show" | "jobs" | "past"};
 
 function formatTimeAgo(unixSeconds: number) {
   const diffMs = Date.now() - unixSeconds * 1000;
