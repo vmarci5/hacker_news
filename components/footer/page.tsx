@@ -19,50 +19,52 @@ export default function FooterNav() {
             asChild
             className="w-full md:w-auto justify-start md:justify-center"
           >
-            <Link href="">Guidelines</Link>
+            <Link href="/footer/guidelines">Guidelines</Link>
           </Button>
           <Button
             asChild
             className="w-full md:w-auto justify-start md:justify-center"
           >
-            <Link href="/faq">FAQ</Link>
+            <Link href="/footer/faq">FAQ</Link>
           </Button>
           <Button
             asChild
             className="w-full md:w-auto justify-start md:justify-center"
           >
-            <Link href="/lists">Lists</Link>
+            <Link href="https://news.ycombinator.com/lists">Lists</Link>
           </Button>
           <Button
             asChild
             className="w-full md:w-auto justify-start md:justify-center"
           >
-            <Link href="/api">API</Link>
+            <Link href="https://github.com/HackerNews/API">API</Link>
           </Button>
           <Button
             asChild
             className="w-full md:w-auto justify-start md:justify-center"
           >
-            <Link href="/security">Security</Link>
+            <Link href="/footer/security">Security</Link>
           </Button>
           <Button
             asChild
             className="w-full md:w-auto justify-start md:justify-center"
           >
-            <Link href="/legal">Legal</Link>
+            <Link href="https://www.ycombinator.com/legal/">Legal</Link>
           </Button>
           <Button
             asChild
             className="w-full md:w-auto justify-start md:justify-center"
           >
-            <Link href="/apply">Apply to YC</Link>
+            <Link href="https://www.ycombinator.com/apply/">Apply to YC</Link>
           </Button>
           <Button
             asChild
             variant="outline"
             className="w-full md:w-auto justify-start md:justify-center"
           >
-            <Link href="/contact">Contact</Link>
+            <Link href="mailto:security@ycombinator.com">
+              Contact
+            </Link>
           </Button>
         </section>
       </div>
