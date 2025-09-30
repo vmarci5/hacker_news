@@ -60,7 +60,7 @@ export async function GET(
     const url = new URL(req.url);
     const maxDepth = Math.max(
       0,
-      Math.min(10, Number(url.searchParams.get("maxDepth")) || 6)
+      Math.min(10, Number(url.searchParams.get("maxDepth")) || 10)
     );
 
     const item = await getItem(Number(id));
