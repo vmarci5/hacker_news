@@ -109,13 +109,13 @@ export default function PostsGrid({feed = "top"}: Props) {
       <div className="grid m-auto p-4 gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 sm:grid-cols-1">
         {items.map((p, index) => {
           const rank = index + 1 + (page - 1) * pageSize;
-          const href = p.url ?? `https://news.ycombinator.com/item?id=${p.id}`;
+          const href = p.url ?? `/item/${p.id}`;
           return (
             <Card
               key={p.id}
               className="flex flex-coltransition-transform duration-150 hover:scale-105 hover:bg-orange-300 cursor-pointer border-4 border-orange-500 p-0"
               onClick={() =>
-                router.push(`https://news.ycombinator.com/item?id=${p.id}`)
+                router.push(`/item/${p.id}`)
               }
             >
               <CardHeader className="border-b-2 pb-2 border-orange-200 bg-orange-50 rounded-t-lg hover:bg-orange-400">
