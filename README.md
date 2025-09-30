@@ -13,14 +13,14 @@ The content of the pages is rendered using the official [Hacker News API](https:
 
 ## Getting Started
 Installation and running:
-git clone https://github.com/vmarci5/hacker_news.git
-cd hacker_news
-npm install    # or yarn / pnpm install
-npm run dev    # developer mode (http://localhost:3000)
+- git clone https://github.com/vmarci5/hacker_news.git
+- cd hacker_news
+- npm install    # or yarn / pnpm install
+- npm run dev    # developer mode (http://localhost:3000)
 
 Build + prod mode:
-npm run build
-npm run start
+- npm run build
+- npm run start
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
