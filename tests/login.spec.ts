@@ -1,0 +1,36 @@
+import { test, expect } from '@playwright/test';
+
+test('login', async ({ page }) => {
+  await page.goto('http://localhost:3000/login');
+  await expect(page.getByText('USERNAMEPASSWORDLOGINForgot')).toBeVisible();
+  await expect(page.locator('form')).toContainText('USERNAME');
+  await expect(page.locator('form')).toContainText('PASSWORD');
+  await expect(page.getByRole('textbox', { name: 'USERNAME' })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'PASSWORD' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'LOGIN', exact: true })).toBeVisible();
+  await expect(page.locator('form')).toContainText('LOGIN');
+  await expect(page.getByRole('button', { name: 'Forgot your password?' })).toBeVisible();
+  await expect(page.locator('form')).toContainText('Forgot your password?');
+  await expect(page.getByRole('button', { name: 'You need an account? Sign up' })).toBeVisible();
+  await expect(page.locator('form')).toContainText('You need an account? Sign up here!');
+  await page.getByRole('button', { name: 'You need an account? Sign up' }).click();
+  await expect(page.getByText('USERNAMEPASSWORDSign upYou')).toBeVisible();
+  await expect(page.getByText('USERNAME')).toBeVisible();
+  await expect(page.getByText('PASSWORD')).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'USERNAME' })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'PASSWORD' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Sign up' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'You already have an account?' })).toBeVisible();
+  await expect(page.locator('form')).toContainText('USERNAME');
+  await expect(page.locator('form')).toContainText('PASSWORD');
+  await expect(page.locator('form')).toContainText('Sign up');
+  await expect(page.locator('form')).toContainText('You already have an account? Login here!');
+  await page.getByRole('button', { name: 'You already have an account?' }).click();
+  await page.getByRole('button', { name: 'Forgot your password?' }).click();
+  await expect(page.getByText('USERNAMESend reset email')).toBeVisible();
+  await expect(page.getByText('USERNAME')).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'USERNAME' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Send reset email' })).toBeVisible();
+  await expect(page.locator('label')).toContainText('USERNAME');
+  await expect(page.locator('form')).toContainText('Send reset email');
+});
